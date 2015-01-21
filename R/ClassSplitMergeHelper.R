@@ -17,9 +17,14 @@ splitClassFile = function( inPath, filename, outPath, splitTag = "#--split "){
   return(TRUE)
 }
 
-mergeClassFiles = function( inPath, filename, outPath, outFilename, ... ){
+mergeClassFiles = function( inPath, filenames, outPath, outFilename, ... ){
   
-  fnames = list.files(path = inPath, ... )
+  if(missing(filenames)){
+    fnames = list.files(path = inPath, ... )    
+  } else{
+    fnames = filenames
+  }
+  
   fnames = file.path(inPath, fnames)
   fileInL = lapply( fnames, function(x){
     cat( readLines(con = x), file = file.path(outPath, outFilename), append = TRUE, sep = "\n")
@@ -28,5 +33,3 @@ mergeClassFiles = function( inPath, filename, outPath, outFilename, ... ){
   message(paste0("All files written to ", file.path(outPath, outFilename))  )
   return(TRUE)
 }
-
-
