@@ -26,7 +26,9 @@ mergeClassFiles = function( inPath, filenames, outPath, outFilename, ... ){
   }
   
   fnames = file.path(inPath, fnames)
+  file.create(file.path(outPath, outFilename), force=TRUE)
   fileInL = lapply( fnames, function(x){
+    
     cat( readLines(con = x), file = file.path(outPath, outFilename), append = TRUE, sep = "\n")
     return("")
   } )
