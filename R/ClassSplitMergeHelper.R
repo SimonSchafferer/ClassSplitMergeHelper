@@ -1,6 +1,17 @@
-
+#' @title Helper function
+#' @param x
+#' @param pos
+#' @export
+#' @docType methods
 splitAt <- function(x, pos) unname(split(x, cumsum(seq_along(x) %in% pos)))
 
+#' @title Splitting class files from one single R file
+#' @param inPath
+#' @param filename
+#' @param outPath
+#' @param splitTag default '#--split '
+#' @export
+#' @docType methods
 splitClassFile = function( inPath, filename, outPath, splitTag = "#--split "){
   dir.create(outPath)
   singleClassFile = readLines(con = file.path(inPath, filename))
@@ -17,6 +28,13 @@ splitClassFile = function( inPath, filename, outPath, splitTag = "#--split "){
   return(TRUE)
 }
 
+#' @title Merging class files that are located in the same folder
+#' @param inPath
+#' @param filenames
+#' @param outPath
+#' @param outFilename
+#' @export
+#' @docType methods
 mergeClassFiles = function( inPath, filenames, outPath, outFilename, ... ){
   
   if(missing(filenames)){
